@@ -7,6 +7,7 @@ defmodule DockupDemo.Products.Product do
     field :category, :string
     field :name, :string
     field :price, :decimal
+    field :discount, :integer, default: 0
 
     timestamps()
   end
@@ -14,7 +15,7 @@ defmodule DockupDemo.Products.Product do
   @doc false
   def changeset(product, attrs) do
     product
-    |> cast(attrs, [:name, :category, :price])
+    |> cast(attrs, [:name, :category, :price, :discount])
     |> validate_required([:name, :category, :price])
   end
 end

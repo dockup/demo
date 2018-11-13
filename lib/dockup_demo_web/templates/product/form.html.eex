@@ -17,6 +17,10 @@
   <%= number_input f, :price, step: "any" %>
   <%= error_tag f, :price %>
 
+  <%= label f, "#{:discount} %" %>
+  <%= number_input f, :discount, step: "any" %>
+  <%= error_tag f, :discount %>
+
   <div>
     <%= submit "Save" %>
   </div>

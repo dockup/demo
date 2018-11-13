@@ -17,6 +17,10 @@
     $ <%= @product.price %>
   </li>
 
+  <li>
+    <strong>Discount:</strong>
+    <%= @product.discount %>%
+  </li>
 </ul>
 
 <span><%= link "Edit", to: Routes.product_path(@conn, :edit, @product) %></span>

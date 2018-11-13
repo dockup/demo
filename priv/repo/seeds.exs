@@ -18,37 +18,44 @@ products_attrs = [
   %{
     name: "Apple iPhone Xr",
     category: "iPhone",
-    price: "749"
+    price: "749",
+    discount: 5
   },
   %{
     name: "Apple iPhone Xs",
     category: "iPhone",
-    price: "1000"
+    price: "1000",
+    discount: 5
   },
   %{
     name: "Apple iPhone Xs Max",
     category: "iPhone",
-    price: "1099"
+    price: "1099",
+    discount: 5
   },
   %{
     name: "Apple Macbook Air 13",
     category: "Mac",
-    price: "1199"
+    price: "1199",
+    discount: 10
   },
   %{
     name: "Apple Macbook Pro 13",
     category: "Mac",
-    price: "1299"
+    price: "1299",
+    discount: 10
   },
   %{
     name: "Apple Macbook Pro 15",
     category: "Mac",
-    price: "2399"
+    price: "2399",
+    discount: 15
   },
   %{
     name: "Apple iMac Pro",
     category: "Mac",
-    price: "4999"
+    price: "4999",
+    discount: 2
   },
   %{
     name: "Apple Mac mini",
@@ -73,7 +80,8 @@ products_attrs = [
   %{
     name: "Apple Airpods",
     category: "Accessories",
-    price: "159"
+    price: "159",
+    discount: 15
   }
 ]
 

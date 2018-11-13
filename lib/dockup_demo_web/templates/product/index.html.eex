@@ -6,6 +6,7 @@
       <th>Name</th>
       <th>Category</th>
       <th>Price</th>
+      <th>Discount</th>
 
       <th></th>
     </tr>
@@ -15,7 +16,13 @@
     <tr>
       <td><%= product.name %></td>
       <td><%= product.category %></td>
-      <td>$ <%= product.price %></td>
+      <%= if product.discount > 0 do %>
+        <td>$ <s><%= product.price %></s> <%= get_discounted_price(product) %></td>
+        <td><%= product.discount %>%</td>
+      <% else %>
+        <td>$ <%= product.price %></td>
+        <td> - </td>
+      <% end %>
 
       <td>
         <%= link "Show", to: Routes.product_path(@conn, :show, product) %>

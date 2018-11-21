@@ -1,21 +1,9 @@
 # ================================================================================
-# Compile node assets as a separate stage
-FROM node:9 AS staticassets
-
-RUN apt-get update && apt-get install -y build-essential
-RUN mkdir -p /dockup-demo/assets
-WORKDIR /dockup-demo/assets
-COPY ./assets/package*.json ./
-RUN npm install
-COPY ./assets .
-RUN npm run deploy
-
-# ================================================================================
 # Compile elixir app as a separate stage
 FROM elixir:1.7.2-alpine AS application
 
 # RUN apt-get update && apt-get install -y build-essential
-RUN apk --update upgrade && apk add --no-cache build-base git
+RUN apk --update upgrade && apk add --no-cache build-base git nodejs
 RUN mix local.hex --force && mix local.rebar --force
 RUN mkdir -p /dockup-demo
 WORKDIR /dockup-demo
@@ -25,8 +13,17 @@ RUN mix deps.get --force --only prod
 COPY . ./
 COPY ./config/prod.secret.example.exs \
      config/prod.secret.exs
-COPY --from=staticassets \
-     /dockup-demo/priv/static priv/static
+
+# setup staticassets
+RUN mkdir -p /dockup-demo/assets
+WORKDIR /dockup-demo/assets
+COPY ./assets/package*.json ./
+RUN npm install
+COPY ./assets .
+RUN npm run deploy
+
+# continue with phoenix
+WORKDIR /dockup-demo
 ENV MIX_ENV prod
 RUN mix deps.get --only prod && \
     mix phx.digest && \

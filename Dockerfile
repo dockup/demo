@@ -3,7 +3,7 @@
 FROM elixir:1.7.2-alpine AS application
 
 # RUN apt-get update && apt-get install -y build-essential
-RUN apk --update upgrade && apk add --no-cache build-base git nodejs
+RUN apk --update upgrade && apk add --no-cache build-base git nodejs nodejs-npm
 RUN mix local.hex --force && mix local.rebar --force
 RUN mkdir -p /dockup-demo
 WORKDIR /dockup-demo

@@ -1,4 +1,4 @@
-defmodule MyApp.ReleaseTasks do
+defmodule DockupDemo.ReleaseTasks do
 
   @start_apps [
     :crypto,

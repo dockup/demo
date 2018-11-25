@@ -22,6 +22,9 @@ defmodule DockupDemo.ReleaseTasks do
     # Start apps necessary for executing migrations
     Enum.each(@start_apps, &Application.ensure_all_started/1)
 
+    # create databases
+    create_databases()
+
     # Start the Repo(s) for myapp
     IO.puts "Starting repos.."
     Enum.each(repos(), &(&1.start_link(pool_size: 1)))
@@ -35,6 +38,13 @@ defmodule DockupDemo.ReleaseTasks do
     # Signal shutdown
     IO.puts "Success!"
     :init.stop()
+  end
+
+  def create_databases() do
+    Enum.each(repos(), fn (repo) ->
+      IO.inspect repo.config
+      IO.inspect repo.__adapter__.storage_up(repo.config)
+    end)
   end
 
   def migrate, do: Enum.each(repos(), &run_migrations_for/1)

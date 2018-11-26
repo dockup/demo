@@ -7,16 +7,12 @@ defmodule DockupDemo.ReleaseTasks do
     :ecto
   ]
 
-  def myapp, do: Application.get_application(__MODULE__)
-
-  def repos, do: Application.get_env(myapp(), :ecto_repos, [])
+  def repos, do: Application.get_env(:dockup_demo, :ecto_repos, [])
 
   def migrate do
-    me = myapp()
-
-    IO.puts "Loading #{me}.."
+    IO.puts "Loading :dockup_demo.."
     # Load the code for myapp, but don't start it
-    :ok = Application.load(me)
+    :ok = Application.load(:dockup_demo)
 
     IO.puts "Starting dependencies.."
     # Start apps necessary for executing migrations

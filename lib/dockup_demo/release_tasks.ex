@@ -4,7 +4,8 @@ defmodule DockupDemo.ReleaseTasks do
     :crypto,
     :ssl,
     :postgrex,
-    :ecto
+    :ecto,
+    :ecto_sql
   ]
 
   def repos, do: Application.get_env(:dockup_demo, :ecto_repos, [])

@@ -11,7 +11,7 @@ defmodule DockupDemo.ReleaseTasks do
 
   def repos, do: Application.get_env(myapp(), :ecto_repos, [])
 
-  def seed do
+  def migrate do
     me = myapp()
 
     IO.puts "Loading #{me}.."
@@ -30,7 +30,7 @@ defmodule DockupDemo.ReleaseTasks do
     Enum.each(repos(), &(&1.start_link(pool_size: 1)))
 
     # Run migrations
-    migrate()
+    migrate_repos()
 
     # Run seed script
     Enum.each(repos(), &run_seeds_for/1)
@@ -47,7 +47,7 @@ defmodule DockupDemo.ReleaseTasks do
     end)
   end
 
-  def migrate, do: Enum.each(repos(), &run_migrations_for/1)
+  def migrate_repos, do: Enum.each(repos(), &run_migrations_for/1)
 
   def priv_dir(app), do: "#{:code.priv_dir(app)}"
 

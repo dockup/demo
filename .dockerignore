@@ -1,0 +1,7 @@
+assets/node_modules
+assets/npm-debug.log
+deps
+_build
+.dockerignore
+.git
+.gitignore

@@ -6,6 +6,9 @@ defmodule DockupDemo.Application do
   use Application
 
   def start(_type, _args) do
+
+    DockupDemo.Config.set_configs_from_env()
+
     # List all child processes to be supervised
     children = [
       # Start the Ecto repository

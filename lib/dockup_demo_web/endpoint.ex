@@ -43,4 +43,36 @@ defmodule DockupDemoWeb.Endpoint do
     signing_salt: "DKfYs9fb"
 
   plug DockupDemoWeb.Router
+
+  @doc """
+  Callback invoked for dynamically configuring the endpoint.
+  It receives the endpoint configuration and checks if
+  configuration should be loaded from the system environment.
+  """
+  def init(_key, config) do
+    if config[:load_from_system_env] do
+      config_from_env_vars =
+        config
+        |> load_port_from_system_env
+        |> load_host_from_system_env
+
+      {:ok, config_from_env_vars}
+    else
+      {:ok, config}
+    end
+  end
+
+  defp load_port_from_system_env(config) do
+    port = System.get_env("PORT") ||
+      raise "expected the PORT environment variable to be set"
+
+    Keyword.put(config, :http, [:inet6, port: port])
+  end
+
+  defp load_host_from_system_env(config) do
+    dockup_url = Application.get_env(:dockup_demo, :dockup_demo_url_host) ||
+      raise "expected DOCKUP_DEMO_URL_HOST env var to be set"
+
+    put_in(config, [:url, :host], dockup_url)
+  end
 end

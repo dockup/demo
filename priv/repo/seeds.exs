@@ -77,8 +77,10 @@ products_attrs = [
   }
 ]
 
-Enum.each(products_attrs, fn product_attrs ->
-  %Product{}
-  |> Product.changeset(product_attrs)
-  |> Repo.insert!
-end)
+if Repo.all(Product) == [] do
+  Enum.each(products_attrs, fn product_attrs ->
+    %Product{}
+    |> Product.changeset(product_attrs)
+    |> Repo.insert!
+  end)
+end

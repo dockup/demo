@@ -18,7 +18,7 @@
       <td><%= product.category %></td>
       <%= if product.discount > 0 do %>
         <td>$ <s><%= product.price %></s> <%= get_discounted_price(product) %></td>
-        <td><%= product.discount %>%</td>
+        <td style="color:green"><%= product.discount %>%</td>
       <% else %>
         <td>$ <%= product.price %></td>
         <td> - </td>
